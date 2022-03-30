@@ -34,7 +34,10 @@ function Bot:Read()
     if msg == "PING :tmi.twitch.tv" then
         self.Client:send("PONG :tmi.twitch.tv")
     end
-    if msg ~= nil then self:Message(Message:Process(msg)) end
+    if msg ~= nil then
+        local response = Message:Process(msg)
+        self:Message(response)
+    end
 end
 
 return Bot

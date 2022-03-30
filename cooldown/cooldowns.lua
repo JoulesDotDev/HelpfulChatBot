@@ -1,0 +1,3 @@
+local Cooldowns = {}
+
+return Cooldowns
