@@ -25,8 +25,15 @@ end
 function Bot:Message(msg)
     if msg == nil then return end
     local template = "PRIVMSG %s :%s" .. "\r\n"
-    local privmsg = string.format(template, self.Channel, msg)
-    self.Client:send(privmsg)
+    if type(msg) == "table" then
+        for i, v in ipairs(msg) do
+            local privmsg = string.format(template, self.Channel, v)
+            self.Client:send(privmsg)
+        end
+    else
+        local privmsg = string.format(template, self.Channel, msg)
+        self.Client:send(privmsg)
+    end
 end
 
 function Bot:Read()

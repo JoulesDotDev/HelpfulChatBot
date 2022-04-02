@@ -1,6 +1,6 @@
 local Cooldowns = require("cooldown.cooldowns")
 
-local cooldown = 5
+local cooldown = 3
 
 local function Store(command, user)
     if Cooldowns[command] ~= nil and Cooldowns[command][user.name] ~= nil then
