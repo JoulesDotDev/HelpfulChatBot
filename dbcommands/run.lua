@@ -9,9 +9,7 @@ local function run(command)
     local createCommand =
         "CREATE TABLE IF NOT EXISTS commands (id INTEGER PRIMARY KEY, name VARCHAR(25) NOT NULL, value VARCHAR(50) NOT NULL)"
     local result = db:exec(createCommand)
-    if result ~= sqlite3.OK then
-        return string.format("create machine broke")
-    end
+    if result ~= sqlite3.OK then return string.format("create machine broke") end
 
     -- find command in database
     local findCommand = "SELECT * FROM commands WHERE name = ?"
@@ -21,7 +19,10 @@ local function run(command)
     -- bind values
     result = stmt:bind_values(command)
     -- check if statement is ok
-    if result ~= sqlite3.OK then db:close() return nil end
+    if result ~= sqlite3.OK then
+        db:close()
+        return nil
+    end
     -- iterate over rows
     while stmt:step() == sqlite3.ROW do
         -- get command value
