@@ -1,5 +1,6 @@
 local Commands = require("commands.module")
 local Cooldown = require("cooldown.module")
+local Run = require("dbcommands.module").run
 
 local Command = {}
 
@@ -18,6 +19,11 @@ function Command:Run(user, msg)
             if response ~= nil then Cooldown.store(command, user) end
             return response
         end
+    else
+        -- run command from database
+        local response = Run(command)
+        if response ~= nil then Cooldown.store(command, user) end
+        return response
     end
 end
 
