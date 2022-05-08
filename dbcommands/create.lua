@@ -13,7 +13,8 @@ local function create(user, msg)
     end
     -- get name and value
     local name = string.lower(parameters[2])
-    local value = parameters[3]
+    local _, indexEnd = string.find(msg, name)
+    local value = string.sub(msg, indexEnd + 2)
 
     -- check if name and value are valid
     if name == nil or value == nil then
